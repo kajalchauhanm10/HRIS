@@ -14,11 +14,27 @@ namespace HRIS.Models
     
     public partial class CYCCycleMST
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CYCCycleMST()
+        {
+            this.CycCycleToReviewerMapIds = new HashSet<CycCycleToReviewerMapId>();
+            this.CYCCycleToParameterMaps = new HashSet<CYCCycleToParameterMap>();
+        }
+    
         public long CYCCycleMSTId { get; set; }
         public string CycleName { get; set; }
         public Nullable<System.DateTime> CycleBeginDate { get; set; }
         public Nullable<System.DateTime> CycleEndDate { get; set; }
         public Nullable<System.DateTime> CycleReleaseReportDate { get; set; }
         public string Status { get; set; }
+        public Nullable<long> CreatedBy { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public Nullable<long> ModifiedBy { get; set; }
+        public Nullable<System.DateTime> ModifiedDate { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CycCycleToReviewerMapId> CycCycleToReviewerMapIds { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CYCCycleToParameterMap> CYCCycleToParameterMaps { get; set; }
     }
 }

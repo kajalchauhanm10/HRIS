@@ -138,6 +138,9 @@
     <Compile Include="Models\CYCCycleToParameterMap.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CycCycleToReviewerMapId.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CYCCycleToUserMap.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

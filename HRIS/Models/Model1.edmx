@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HRISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="HRISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="APPActivityMst">
           <Key>
             <PropertyRef Name="APPActivityMstId" />
@@ -130,8 +130,6 @@
           <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
           <Property Name="WorkStation" Type="varchar" MaxLength="32" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'HRIS.dbo.CYCCycleMST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CYCCycleMST">
           <Key>
             <PropertyRef Name="CYCCycleMSTId" />
@@ -142,9 +140,11 @@ warning 6002: The table/view 'HRIS.dbo.CYCCycleMST' does not have a primary key 
           <Property Name="CycleEndDate" Type="datetime" />
           <Property Name="CycleReleaseReportDate" Type="datetime" />
           <Property Name="Status" Type="varchar" MaxLength="50" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="ModifiedDate" Type="date" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'HRIS.dbo.CYCCycleToParameterMap' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CYCCycleToParameterMap">
           <Key>
             <PropertyRef Name="CYCCycleToParameterMapId" />
@@ -152,6 +152,20 @@ warning 6002: The table/view 'HRIS.dbo.CYCCycleToParameterMap' does not have a p
           <Property Name="CYCCycleToParameterMapId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="CYCCycleMSTId" Type="bigint" />
           <Property Name="CYCParameterMSTId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="CycCycleToReviewerMapId">
+          <Key>
+            <PropertyRef Name="CycCycleToReviewerMapId" />
+          </Key>
+          <Property Name="CycCycleToReviewerMapId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CYCCycleMSTId" Type="bigint" Nullable="false" />
+          <Property Name="CYCReviewersMSTId" Type="bigint" Nullable="false" />
+          <Property Name="EvaluationDate" Type="date" Nullable="false" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedDate" Type="date" />
+          <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="ModifiedDate" Type="date" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'HRIS.dbo.CYCCycleToUserMap' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -184,8 +198,6 @@ warning 6002: The table/view 'HRIS.dbo.CYCGoalMST' does not have a primary key d
           <Property Name="CYCGoalMSTId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="GoalName" Type="varchar" MaxLength="255" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'HRIS.dbo.CYCParameterMST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CYCParameterMST">
           <Key>
             <PropertyRef Name="CYCParameterMSTId" />
@@ -205,8 +217,6 @@ warning 6002: The table/view 'HRIS.dbo.CYCQuesMST' does not have a primary key d
           <Property Name="CYCParameterMSTId" Type="bigint" />
           <Property Name="CYCStyleMSTId" Type="bigint" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'HRIS.dbo.CYCRatingSystemMST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CYCRatingSystemMST">
           <Key>
             <PropertyRef Name="CYCRatingSystemMSTId" />
@@ -214,8 +224,6 @@ warning 6002: The table/view 'HRIS.dbo.CYCRatingSystemMST' does not have a prima
           <Property Name="CYCRatingSystemMSTId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RatingSystemName" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'HRIS.dbo.CYCReviewersMST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CYCReviewersMST">
           <Key>
             <PropertyRef Name="CYCReviewersMSTId" />
@@ -223,13 +231,6 @@ warning 6002: The table/view 'HRIS.dbo.CYCReviewersMST' does not have a primary 
           <Property Name="CYCReviewersMSTId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'HRIS.dbo.CYCStyleMST' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="CYCStyleMST">
-          <Property Name="StyleID" Type="bigint" />
-          <Property Name="StyleVal" Type="varchar" MaxLength="150" />
-          <Property Name="ParentID" Type="bigint" />
-        </EntityType>-->
         <!--Errors Found During Generation:
 warning 6002: The table/view 'HRIS.dbo.CYCSubGoalMST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CYCSubGoalMST">
@@ -387,6 +388,54 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
           <Property Name="Password" Type="varchar" MaxLength="250" />
           <Property Name="PasswordSalt" Type="varchar" MaxLength="250" />
         </EntityType>
+        <Association Name="FK_CYCCycleMST">
+          <End Role="CYCCycleMST" Type="Self.CYCCycleMST" Multiplicity="0..1" />
+          <End Role="CYCCycleToParameterMap" Type="Self.CYCCycleToParameterMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CYCCycleMST">
+              <PropertyRef Name="CYCCycleMSTId" />
+            </Principal>
+            <Dependent Role="CYCCycleToParameterMap">
+              <PropertyRef Name="CYCCycleMSTId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CycleMST">
+          <End Role="CYCCycleMST" Type="Self.CYCCycleMST" Multiplicity="1" />
+          <End Role="CycCycleToReviewerMapId" Type="Self.CycCycleToReviewerMapId" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CYCCycleMST">
+              <PropertyRef Name="CYCCycleMSTId" />
+            </Principal>
+            <Dependent Role="CycCycleToReviewerMapId">
+              <PropertyRef Name="CYCCycleMSTId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CYCParameterMST">
+          <End Role="CYCParameterMST" Type="Self.CYCParameterMST" Multiplicity="0..1" />
+          <End Role="CYCCycleToParameterMap" Type="Self.CYCCycleToParameterMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CYCParameterMST">
+              <PropertyRef Name="CYCParameterMSTId" />
+            </Principal>
+            <Dependent Role="CYCCycleToParameterMap">
+              <PropertyRef Name="CYCParameterMSTId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CYCReviewersMST">
+          <End Role="CYCReviewersMST" Type="Self.CYCReviewersMST" Multiplicity="1" />
+          <End Role="CycCycleToReviewerMapId" Type="Self.CycCycleToReviewerMapId" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CYCReviewersMST">
+              <PropertyRef Name="CYCReviewersMSTId" />
+            </Principal>
+            <Dependent Role="CycCycleToReviewerMapId">
+              <PropertyRef Name="CYCReviewersMSTId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="HRISModelStoreContainer">
           <EntitySet Name="APPActivityMst" EntityType="Self.APPActivityMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="APPCityMst" EntityType="Self.APPCityMst" Schema="dbo" store:Type="Tables" />
@@ -396,6 +445,12 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
           <EntitySet Name="APPLocationMst" EntityType="Self.APPLocationMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="APPStateMst" EntityType="Self.APPStateMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="APPUserActivity" EntityType="Self.APPUserActivity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CYCCycleMST" EntityType="Self.CYCCycleMST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CYCCycleToParameterMap" EntityType="Self.CYCCycleToParameterMap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CycCycleToReviewerMapId" EntityType="Self.CycCycleToReviewerMapId" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CYCParameterMST" EntityType="Self.CYCParameterMST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CYCRatingSystemMST" EntityType="Self.CYCRatingSystemMST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CYCReviewersMST" EntityType="Self.CYCReviewersMST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UMMForgotPassword" EntityType="Self.UMMForgotPassword" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UMMRoleMst" EntityType="Self.UMMRoleMst" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UMMUserGroup" EntityType="Self.UMMUserGroup" Schema="dbo" store:Type="Tables" />
@@ -403,23 +458,6 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
           <EntitySet Name="UMMUserLocationMap" EntityType="Self.UMMUserLocationMap" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UMMUserLogIn" EntityType="Self.UMMUserLogIn" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UMMUserProfile" EntityType="Self.UMMUserProfile" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="CYCCycleMST" EntityType="Self.CYCCycleMST" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [CYCCycleMST].[CYCCycleMSTId] AS [CYCCycleMSTId], 
-    [CYCCycleMST].[CycleName] AS [CycleName], 
-    [CYCCycleMST].[CycleBeginDate] AS [CycleBeginDate], 
-    [CYCCycleMST].[CycleEndDate] AS [CycleEndDate], 
-    [CYCCycleMST].[CycleReleaseReportDate] AS [CycleReleaseReportDate], 
-    [CYCCycleMST].[Status] AS [Status]
-    FROM [dbo].[CYCCycleMST] AS [CYCCycleMST]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="CYCCycleToParameterMap" EntityType="Self.CYCCycleToParameterMap" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [CYCCycleToParameterMap].[CYCCycleToParameterMapId] AS [CYCCycleToParameterMapId], 
-    [CYCCycleToParameterMap].[CYCCycleMSTId] AS [CYCCycleMSTId], 
-    [CYCCycleToParameterMap].[CYCParameterMSTId] AS [CYCParameterMSTId]
-    FROM [dbo].[CYCCycleToParameterMap] AS [CYCCycleToParameterMap]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="CYCCycleToUserMap" EntityType="Self.CYCCycleToUserMap" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [CYCCycleToUserMap].[CYCCycleToUserMapId] AS [CYCCycleToUserMapId], 
@@ -442,13 +480,6 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
     [CYCGoalMST].[GoalName] AS [GoalName]
     FROM [dbo].[CYCGoalMST] AS [CYCGoalMST]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="CYCParameterMST" EntityType="Self.CYCParameterMST" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [CYCParameterMST].[CYCParameterMSTId] AS [CYCParameterMSTId], 
-    [CYCParameterMST].[ParameterName] AS [ParameterName], 
-    [CYCParameterMST].[CYCRatingSystemMSTId] AS [CYCRatingSystemMSTId]
-    FROM [dbo].[CYCParameterMST] AS [CYCParameterMST]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="CYCQuesMST" EntityType="Self.CYCQuesMST" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [CYCQuesMST].[CYCQuesMSTId] AS [CYCQuesMSTId], 
@@ -456,18 +487,6 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
     [CYCQuesMST].[CYCParameterMSTId] AS [CYCParameterMSTId], 
     [CYCQuesMST].[CYCStyleMSTId] AS [CYCStyleMSTId]
     FROM [dbo].[CYCQuesMST] AS [CYCQuesMST]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="CYCRatingSystemMST" EntityType="Self.CYCRatingSystemMST" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [CYCRatingSystemMST].[CYCRatingSystemMSTId] AS [CYCRatingSystemMSTId], 
-    [CYCRatingSystemMST].[RatingSystemName] AS [RatingSystemName]
-    FROM [dbo].[CYCRatingSystemMST] AS [CYCRatingSystemMST]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="CYCReviewersMST" EntityType="Self.CYCReviewersMST" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [CYCReviewersMST].[CYCReviewersMSTId] AS [CYCReviewersMSTId], 
-    [CYCReviewersMST].[Name] AS [Name]
-    FROM [dbo].[CYCReviewersMST] AS [CYCReviewersMST]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="CYCSubGoalMST" EntityType="Self.CYCSubGoalMST" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
@@ -493,9 +512,24 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
     [PriorityMST].[Name] AS [Name]
     FROM [dbo].[PriorityMST] AS [PriorityMST]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_CYCCycleMST" Association="Self.FK_CYCCycleMST">
+            <End Role="CYCCycleMST" EntitySet="CYCCycleMST" />
+            <End Role="CYCCycleToParameterMap" EntitySet="CYCCycleToParameterMap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CycleMST" Association="Self.FK_CycleMST">
+            <End Role="CYCCycleMST" EntitySet="CYCCycleMST" />
+            <End Role="CycCycleToReviewerMapId" EntitySet="CycCycleToReviewerMapId" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CYCParameterMST" Association="Self.FK_CYCParameterMST">
+            <End Role="CYCParameterMST" EntitySet="CYCParameterMST" />
+            <End Role="CYCCycleToParameterMap" EntitySet="CYCCycleToParameterMap" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CYCReviewersMST" Association="Self.FK_CYCReviewersMST">
+            <End Role="CYCReviewersMST" EntitySet="CYCReviewersMST" />
+            <End Role="CycCycleToReviewerMapId" EntitySet="CycCycleToReviewerMapId" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HRISModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -758,6 +792,12 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
           <Property Name="CycleEndDate" Type="DateTime" Precision="3" />
           <Property Name="CycleReleaseReportDate" Type="DateTime" Precision="3" />
           <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="CycCycleToReviewerMapIds" Relationship="HRISModel.FK_CycleMST" FromRole="CYCCycleMST" ToRole="CycCycleToReviewerMapId" />
+          <NavigationProperty Name="CYCCycleToParameterMaps" Relationship="HRISModel.FK_CYCCycleMST" FromRole="CYCCycleMST" ToRole="CYCCycleToParameterMap" />
         </EntityType>
         <EntityType Name="CYCCycleToParameterMap">
           <Key>
@@ -766,6 +806,8 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
           <Property Name="CYCCycleToParameterMapId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="CYCCycleMSTId" Type="Int64" />
           <Property Name="CYCParameterMSTId" Type="Int64" />
+          <NavigationProperty Name="CYCCycleMST" Relationship="HRISModel.FK_CYCCycleMST" FromRole="CYCCycleToParameterMap" ToRole="CYCCycleMST" />
+          <NavigationProperty Name="CYCParameterMST" Relationship="HRISModel.FK_CYCParameterMST" FromRole="CYCCycleToParameterMap" ToRole="CYCParameterMST" />
         </EntityType>
         <EntityType Name="CYCCycleToUserMap">
           <Key>
@@ -799,6 +841,7 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
           <Property Name="CYCParameterMSTId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="ParameterName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="CYCRatingSystemMSTId" Type="Int64" />
+          <NavigationProperty Name="CYCCycleToParameterMaps" Relationship="HRISModel.FK_CYCParameterMST" FromRole="CYCParameterMST" ToRole="CYCCycleToParameterMap" />
         </EntityType>
         <EntityType Name="CYCQuesMST">
           <Key>
@@ -822,6 +865,7 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
           </Key>
           <Property Name="CYCReviewersMSTId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CycCycleToReviewerMapIds" Relationship="HRISModel.FK_CYCReviewersMST" FromRole="CYCReviewersMST" ToRole="CycCycleToReviewerMapId" />
         </EntityType>
         <EntityType Name="CYCSubGoalMST">
           <Key>
@@ -878,7 +922,88 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
           <EntitySet Name="CYCSubGoalMSTs" EntityType="Self.CYCSubGoalMST" />
           <EntitySet Name="CYCSubgoalToUserMaps" EntityType="Self.CYCSubgoalToUserMap" />
           <EntitySet Name="PriorityMSTs" EntityType="Self.PriorityMST" />
+          <EntitySet Name="CycCycleToReviewerMapIds" EntityType="HRISModel.CycCycleToReviewerMapId" />
+          <AssociationSet Name="FK_CycleMST" Association="HRISModel.FK_CycleMST">
+            <End Role="CYCCycleMST" EntitySet="CYCCycleMSTs" />
+            <End Role="CycCycleToReviewerMapId" EntitySet="CycCycleToReviewerMapIds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CYCReviewersMST" Association="HRISModel.FK_CYCReviewersMST">
+            <End Role="CYCReviewersMST" EntitySet="CYCReviewersMSTs" />
+            <End Role="CycCycleToReviewerMapId" EntitySet="CycCycleToReviewerMapIds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CYCCycleMST" Association="HRISModel.FK_CYCCycleMST">
+            <End Role="CYCCycleMST" EntitySet="CYCCycleMSTs" />
+            <End Role="CYCCycleToParameterMap" EntitySet="CYCCycleToParameterMaps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CYCParameterMST" Association="HRISModel.FK_CYCParameterMST">
+            <End Role="CYCParameterMST" EntitySet="CYCParameterMSTs" />
+            <End Role="CYCCycleToParameterMap" EntitySet="CYCCycleToParameterMaps" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="CycCycleToReviewerMapId">
+          <Key>
+            <PropertyRef Name="CycCycleToReviewerMapId1" />
+          </Key>
+          <Property Name="CycCycleToReviewerMapId1" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CYCCycleMSTId" Type="Int64" Nullable="false" />
+          <Property Name="CYCReviewersMSTId" Type="Int64" Nullable="false" />
+          <Property Name="EvaluationDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="CYCCycleMST" Relationship="HRISModel.FK_CycleMST" FromRole="CycCycleToReviewerMapId" ToRole="CYCCycleMST" />
+          <NavigationProperty Name="CYCReviewersMST" Relationship="HRISModel.FK_CYCReviewersMST" FromRole="CycCycleToReviewerMapId" ToRole="CYCReviewersMST" />
+        </EntityType>
+        <Association Name="FK_CycleMST">
+          <End Type="HRISModel.CYCCycleMST" Role="CYCCycleMST" Multiplicity="1" />
+          <End Type="HRISModel.CycCycleToReviewerMapId" Role="CycCycleToReviewerMapId" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CYCCycleMST">
+              <PropertyRef Name="CYCCycleMSTId" />
+            </Principal>
+            <Dependent Role="CycCycleToReviewerMapId">
+              <PropertyRef Name="CYCCycleMSTId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CYCReviewersMST">
+          <End Type="HRISModel.CYCReviewersMST" Role="CYCReviewersMST" Multiplicity="1" />
+          <End Type="HRISModel.CycCycleToReviewerMapId" Role="CycCycleToReviewerMapId" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CYCReviewersMST">
+              <PropertyRef Name="CYCReviewersMSTId" />
+            </Principal>
+            <Dependent Role="CycCycleToReviewerMapId">
+              <PropertyRef Name="CYCReviewersMSTId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CYCCycleMST">
+          <End Type="HRISModel.CYCCycleMST" Role="CYCCycleMST" Multiplicity="0..1" />
+          <End Type="HRISModel.CYCCycleToParameterMap" Role="CYCCycleToParameterMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CYCCycleMST">
+              <PropertyRef Name="CYCCycleMSTId" />
+            </Principal>
+            <Dependent Role="CYCCycleToParameterMap">
+              <PropertyRef Name="CYCCycleMSTId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CYCParameterMST">
+          <End Type="HRISModel.CYCParameterMST" Role="CYCParameterMST" Multiplicity="0..1" />
+          <End Type="HRISModel.CYCCycleToParameterMap" Role="CYCCycleToParameterMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CYCParameterMST">
+              <PropertyRef Name="CYCParameterMSTId" />
+            </Principal>
+            <Dependent Role="CYCCycleToParameterMap">
+              <PropertyRef Name="CYCParameterMSTId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1152,6 +1277,10 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
           <EntitySetMapping Name="CYCCycleMSTs">
             <EntityTypeMapping TypeName="HRISModel.CYCCycleMST">
               <MappingFragment StoreEntitySet="CYCCycleMST">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CYCCycleMSTId" ColumnName="CYCCycleMSTId" />
                 <ScalarProperty Name="CycleName" ColumnName="CycleName" />
                 <ScalarProperty Name="CycleBeginDate" ColumnName="CycleBeginDate" />
@@ -1260,6 +1389,21 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
               <MappingFragment StoreEntitySet="PriorityMST">
                 <ScalarProperty Name="PriorityMSTId" ColumnName="PriorityMSTId" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CycCycleToReviewerMapIds">
+            <EntityTypeMapping TypeName="HRISModel.CycCycleToReviewerMapId">
+              <MappingFragment StoreEntitySet="CycCycleToReviewerMapId">
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="EvaluationDate" ColumnName="EvaluationDate" />
+                <ScalarProperty Name="CYCReviewersMSTId" ColumnName="CYCReviewersMSTId" />
+                <ScalarProperty Name="CYCCycleMSTId" ColumnName="CYCCycleMSTId" />
+                <ScalarProperty Name="CycCycleToReviewerMapId1" ColumnName="CycCycleToReviewerMapId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -32,6 +32,11 @@
         <EntityTypeShape EntityType="HRISModel.CYCSubGoalMST" Width="1.5" PointX="4.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HRISModel.CYCSubgoalToUserMap" Width="1.5" PointX="6.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HRISModel.PriorityMST" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRISModel.CycCycleToReviewerMapId" Width="1.5" PointX="15" PointY="10.5" />
+        <AssociationConnector Association="HRISModel.FK_CycleMST" />
+        <AssociationConnector Association="HRISModel.FK_CYCReviewersMST" />
+        <AssociationConnector Association="HRISModel.FK_CYCCycleMST" />
+        <AssociationConnector Association="HRISModel.FK_CYCParameterMST" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

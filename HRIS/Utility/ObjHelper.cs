@@ -8,4 +8,9 @@ namespace HRIS.Utility
     public class ObjHelper
     {
     }
+    public class Reviewrs
+    {
+        public long? id { get; set; }
+        public string name { get; set; }
+    }
 }

@@ -17,5 +17,8 @@ namespace HRIS.Models
         public long CYCCycleToParameterMapId { get; set; }
         public Nullable<long> CYCCycleMSTId { get; set; }
         public Nullable<long> CYCParameterMSTId { get; set; }
+    
+        public virtual CYCCycleMST CYCCycleMST { get; set; }
+        public virtual CYCParameterMST CYCParameterMST { get; set; }
     }
 }

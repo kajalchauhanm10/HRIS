@@ -9,6 +9,8 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using HRIS.Models;
+using System.Data.Entity;
+using HRIS.Utility;
 
 namespace HRIS.Controllers
 {
@@ -16,90 +18,84 @@ namespace HRIS.Controllers
     {
         private HRISEntities db = new HRISEntities();
 
-        // GET: api/PerformanceCycle
-        public IQueryable<CYCCycleMST> GetCYCCycleMSTs()
+        [HttpGet]
+        [Route("api/PerformanceCycle/GetReviewers")]
+        public HttpResponseMessage GetReviewers()
         {
-            return db.CYCCycleMSTs;
-        }
-
-        // GET: api/PerformanceCycle/5
-        [ResponseType(typeof(CYCCycleMST))]
-        public IHttpActionResult GetCYCCycleMST(long id)
-        {
-            CYCCycleMST cYCCycleMST = db.CYCCycleMSTs.Find(id);
-            if (cYCCycleMST == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(cYCCycleMST);
-        }
-
-        // PUT: api/PerformanceCycle/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutCYCCycleMST(long id, CYCCycleMST cYCCycleMST)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != cYCCycleMST.CYCCycleMSTId)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(cYCCycleMST).State = EntityState.Modified;
-
             try
             {
-                db.SaveChanges();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!CYCCycleMSTExists(id))
+                List<Reviewrs> ReviewerList = new List<Reviewrs>();
+                var reviewers= db.CYCReviewersMSTs.Select(x=>new { x.CYCReviewersMSTId, x.Name}).ToList();
+                foreach(var per in reviewers)
                 {
-                    return NotFound();
+                    Reviewrs Reviewrsobj = new Reviewrs()
+                    {
+                        name=per.Name,
+                        id=per.CYCReviewersMSTId
+                    };
+                    ReviewerList.Add(Reviewrsobj);
+                }
+
+
+
+                  return Request.CreateResponse(HttpStatusCode.OK, ReviewerList);
+
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("api/PerformanceCycle/GetCycleByName/{name}")]
+        public HttpResponseMessage GetCycleByName(string name)
+        {
+            try
+            {
+                string cyclename = db.CYCCycleMSTs.Where(x => x.CycleName == name).Select(x=>x.CycleName).FirstOrDefault();
+                if (cyclename == null)
+                {
+                    return Request.CreateResponse(HttpStatusCode.OK, "Cycle does not exist");
                 }
                 else
+
                 {
-                    throw;
+                    return Request.CreateResponse(HttpStatusCode.OK, "Cycle already exists");
                 }
             }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            catch(Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
         }
 
-        // POST: api/PerformanceCycle
-        [ResponseType(typeof(CYCCycleMST))]
-        public IHttpActionResult PostCYCCycleMST(CYCCycleMST cYCCycleMST)
+        
+
+        [HttpPost]
+        [Route("api/PerformanceCycle/PostCycle")]
+        public HttpResponseMessage PostCycle(CYCCycleMST cYCCycleMST)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+
+                db.CYCCycleMSTs.Add(cYCCycleMST);
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK, "Created successfully");
             }
 
-            db.CYCCycleMSTs.Add(cYCCycleMST);
-            db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = cYCCycleMST.CYCCycleMSTId }, cYCCycleMST);
-        }
-
-        // DELETE: api/PerformanceCycle/5
-        [ResponseType(typeof(CYCCycleMST))]
-        public IHttpActionResult DeleteCYCCycleMST(long id)
-        {
-            CYCCycleMST cYCCycleMST = db.CYCCycleMSTs.Find(id);
-            if (cYCCycleMST == null)
+            catch (Exception ex)
             {
-                return NotFound();
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
             }
 
-            db.CYCCycleMSTs.Remove(cYCCycleMST);
-            db.SaveChanges();
 
-            return Ok(cYCCycleMST);
+
+            //  return CreatedAtRoute("DefaultApi", new { id = cYCParameterMST.CYCParameterMSTId }, cYCParameterMST);
         }
+
+       
 
         protected override void Dispose(bool disposing)
         {

@@ -14,7 +14,16 @@ namespace HRIS.Models
     
     public partial class CYCReviewersMST
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CYCReviewersMST()
+        {
+            this.CycCycleToReviewerMapIds = new HashSet<CycCycleToReviewerMapId>();
+        }
+    
         public long CYCReviewersMSTId { get; set; }
         public string Name { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CycCycleToReviewerMapId> CycCycleToReviewerMapIds { get; set; }
     }
 }
