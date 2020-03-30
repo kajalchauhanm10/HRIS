@@ -1,0 +1,1289 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HRISModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="APPActivityMst">
+          <Key>
+            <PropertyRef Name="APPActivityMstId" />
+          </Key>
+          <Property Name="APPActivityMstId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ActivityName" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="ActivityCode" Type="varchar" MaxLength="5" />
+          <Property Name="ActivityDesc" Type="varchar" MaxLength="64" />
+          <Property Name="IsActive" Type="tinyint" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="APPCityMst">
+          <Key>
+            <PropertyRef Name="APPCityMstId" />
+          </Key>
+          <Property Name="APPCityMstId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="APPCountyMstId" Type="bigint" Nullable="false" />
+          <Property Name="CityName" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="CityCode" Type="varchar" MaxLength="20" />
+          <Property Name="IsActive" Type="tinyint" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="APPContinentMst">
+          <Key>
+            <PropertyRef Name="APPContinentMstId" />
+          </Key>
+          <Property Name="APPContinentMstId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ContinentName" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="ContinentCode" Type="varchar" MaxLength="5" />
+          <Property Name="IsActive" Type="tinyint" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="APPCountryMst">
+          <Key>
+            <PropertyRef Name="APPCountryMstId" />
+          </Key>
+          <Property Name="APPCountryMstId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="APPContinentMstId" Type="bigint" Nullable="false" />
+          <Property Name="CountryName" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="CountryCode" Type="varchar" MaxLength="5" />
+          <Property Name="IsActive" Type="tinyint" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="APPCountyMst">
+          <Key>
+            <PropertyRef Name="APPCountyMstId" />
+          </Key>
+          <Property Name="APPCountyMstId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="APPStateMstId" Type="bigint" Nullable="false" />
+          <Property Name="CountyName" Type="varchar" MaxLength="255" />
+          <Property Name="CountyCode" Type="varchar" MaxLength="255" />
+          <Property Name="IsActive" Type="tinyint" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="APPLocationMst">
+          <Key>
+            <PropertyRef Name="APPLocationMstId" />
+          </Key>
+          <Property Name="APPLocationMstId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="APPCityMstId" Type="bigint" Nullable="false" />
+          <Property Name="LocationName" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="LocationCode" Type="varchar" MaxLength="20" />
+          <Property Name="LocationHead" Type="varchar" MaxLength="32" />
+          <Property Name="OMLocationType" Type="int" />
+          <Property Name="AddressLine1" Type="varchar" MaxLength="32" />
+          <Property Name="AddressLine2" Type="varchar" MaxLength="32" />
+          <Property Name="AddressLine3" Type="varchar" MaxLength="32" />
+          <Property Name="IsActive" Type="tinyint" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="APPStateMst">
+          <Key>
+            <PropertyRef Name="APPStateMstId" />
+          </Key>
+          <Property Name="APPStateMstId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="APPCountryMstId" Type="bigint" Nullable="false" />
+          <Property Name="StateName" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="StateCode" Type="varchar" MaxLength="10" />
+          <Property Name="IsActive" Type="tinyint" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="APPUserActivity">
+          <Key>
+            <PropertyRef Name="APPUserActivityId" />
+          </Key>
+          <Property Name="APPUserActivityId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UMMUserProfileId" Type="bigint" Nullable="false" />
+          <Property Name="APPActivityMstId" Type="bigint" Nullable="false" />
+          <Property Name="ActivityStatus" Type="bigint" />
+          <Property Name="ActivityError" Type="varchar" MaxLength="512" />
+          <Property Name="IsActive" Type="smallint" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HRIS.dbo.CYCCycleMST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CYCCycleMST">
+          <Key>
+            <PropertyRef Name="CYCCycleMSTId" />
+          </Key>
+          <Property Name="CYCCycleMSTId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CycleName" Type="varchar" MaxLength="50" />
+          <Property Name="CycleBeginDate" Type="datetime" />
+          <Property Name="CycleEndDate" Type="datetime" />
+          <Property Name="CycleReleaseReportDate" Type="datetime" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HRIS.dbo.CYCCycleToParameterMap' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CYCCycleToParameterMap">
+          <Key>
+            <PropertyRef Name="CYCCycleToParameterMapId" />
+          </Key>
+          <Property Name="CYCCycleToParameterMapId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CYCCycleMSTId" Type="bigint" />
+          <Property Name="CYCParameterMSTId" Type="bigint" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HRIS.dbo.CYCCycleToUserMap' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CYCCycleToUserMap">
+          <Key>
+            <PropertyRef Name="CYCCycleToUserMapId" />
+          </Key>
+          <Property Name="CYCCycleToUserMapId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CYCCycleMSTId" Type="bigint" />
+          <Property Name="UserId" Type="bigint" />
+          <Property Name="Status" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HRIS.dbo.CYCEValuation' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CYCEValuation">
+          <Key>
+            <PropertyRef Name="CYCEValuationId" />
+          </Key>
+          <Property Name="CYCEValuationId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CYCCycleToUserMapId" Type="bigint" />
+          <Property Name="CYCQuesMSTId" Type="bigint" />
+          <Property Name="StyleID" Type="bigint" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HRIS.dbo.CYCGoalMST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CYCGoalMST">
+          <Key>
+            <PropertyRef Name="CYCGoalMSTId" />
+          </Key>
+          <Property Name="CYCGoalMSTId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GoalName" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HRIS.dbo.CYCParameterMST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CYCParameterMST">
+          <Key>
+            <PropertyRef Name="CYCParameterMSTId" />
+          </Key>
+          <Property Name="CYCParameterMSTId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParameterName" Type="varchar" MaxLength="255" />
+          <Property Name="CYCRatingSystemMSTId" Type="bigint" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HRIS.dbo.CYCQuesMST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CYCQuesMST">
+          <Key>
+            <PropertyRef Name="CYCQuesMSTId" />
+          </Key>
+          <Property Name="CYCQuesMSTId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ques" Type="varchar" MaxLength="255" />
+          <Property Name="CYCParameterMSTId" Type="bigint" />
+          <Property Name="CYCStyleMSTId" Type="bigint" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HRIS.dbo.CYCRatingSystemMST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CYCRatingSystemMST">
+          <Key>
+            <PropertyRef Name="CYCRatingSystemMSTId" />
+          </Key>
+          <Property Name="CYCRatingSystemMSTId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RatingSystemName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HRIS.dbo.CYCReviewersMST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CYCReviewersMST">
+          <Key>
+            <PropertyRef Name="CYCReviewersMSTId" />
+          </Key>
+          <Property Name="CYCReviewersMSTId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6013: The table/view 'HRIS.dbo.CYCStyleMST' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="CYCStyleMST">
+          <Property Name="StyleID" Type="bigint" />
+          <Property Name="StyleVal" Type="varchar" MaxLength="150" />
+          <Property Name="ParentID" Type="bigint" />
+        </EntityType>-->
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HRIS.dbo.CYCSubGoalMST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CYCSubGoalMST">
+          <Key>
+            <PropertyRef Name="CYCSubGoalMSTId" />
+          </Key>
+          <Property Name="CYCSubGoalMSTId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CYCGoalMSTId" Type="bigint" />
+          <Property Name="SubGoalName" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HRIS.dbo.CYCSubgoalToUserMap' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="CYCSubgoalToUserMap">
+          <Key>
+            <PropertyRef Name="CYCSubgoalToUserMapId" />
+          </Key>
+          <Property Name="CYCSubgoalToUserMapId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CYCSubGoalMSTId" Type="bigint" />
+          <Property Name="UserId" Type="bigint" />
+          <Property Name="DueDate" Type="date" />
+          <Property Name="CompletedBy" Type="date" />
+          <Property Name="PriorityId" Type="int" />
+          <Property Name="Status" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="PriorityMST">
+          <Key>
+            <PropertyRef Name="PriorityMSTId" />
+          </Key>
+          <Property Name="PriorityMSTId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="UMMForgotPassword">
+          <Key>
+            <PropertyRef Name="UMMForgotPasswordId" />
+          </Key>
+          <Property Name="UMMForgotPasswordId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UMMUserProfileId" Type="bigint" Nullable="false" />
+          <Property Name="Key" Type="varchar" MaxLength="50" />
+          <Property Name="IsActive" Type="tinyint" />
+          <Property Name="CreatedBy" Type="bigint" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="Workstation" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="UMMRoleMst">
+          <Key>
+            <PropertyRef Name="UMMRoleMstId" />
+          </Key>
+          <Property Name="UMMRoleMstId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoleName" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="RoleCode" Type="varchar" MaxLength="20" />
+          <Property Name="RoleDesc" Type="varchar" MaxLength="32" />
+          <Property Name="IsActive" Type="tinyint" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="UMMUserGroup">
+          <Key>
+            <PropertyRef Name="UMMUserGroupId" />
+          </Key>
+          <Property Name="UMMUserGroupId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GroupName" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="IsActive" Type="tinyint" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="CreatedTime" Type="time" Precision="7" />
+          <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="UMMUserGroupDetail">
+          <Key>
+            <PropertyRef Name="UMMUserGroupDetailId" />
+          </Key>
+          <Property Name="UMMUserGroupDetailId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UMMUserGroupId" Type="bigint" Nullable="false" />
+          <Property Name="UMMUserProfileId_GroupMember" Type="bigint" Nullable="false" />
+          <Property Name="UMMUserProfileId_GroupOwner" Type="bigint" Nullable="false" />
+          <Property Name="IsStarredActive" Type="tinyint" />
+          <Property Name="IsActive" Type="tinyint" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="CreatedTime" Type="time" Precision="7" />
+          <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="UMMUserLocationMap">
+          <Key>
+            <PropertyRef Name="UMMUserLocationMapId" />
+          </Key>
+          <Property Name="UMMUserLocationMapId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UMMUserProfileId" Type="bigint" Nullable="false" />
+          <Property Name="APPLocationMstId" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="tinyint" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="UMMUserLogIn">
+          <Key>
+            <PropertyRef Name="UMMUserLogInId" />
+          </Key>
+          <Property Name="UMMUserLogInId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UMMUserProfileId" Type="bigint" Nullable="false" />
+          <Property Name="IsActive" Type="tinyint" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="32" />
+        </EntityType>
+        <EntityType Name="UMMUserProfile">
+          <Key>
+            <PropertyRef Name="UMMUserProfileId" />
+          </Key>
+          <Property Name="UMMUserProfileId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="APPCountryMstId" Type="bigint" />
+          <Property Name="AppStateMstId" Type="bigint" />
+          <Property Name="AppCountyMstId" Type="bigint" />
+          <Property Name="APPCityMstId" Type="bigint" />
+          <Property Name="APPZipCodeMstId" Type="bigint" />
+          <Property Name="Salutation" Type="varchar" MaxLength="5" />
+          <Property Name="FirstName" Type="varchar" MaxLength="32" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="20" />
+          <Property Name="LastName" Type="varchar" MaxLength="32" />
+          <Property Name="OMGender" Type="bigint" />
+          <Property Name="BirthDate" Type="date" />
+          <Property Name="Mobile" Type="varchar" MaxLength="16" />
+          <Property Name="OfficeContact" Type="varchar" MaxLength="16" />
+          <Property Name="UserEmail" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ProfileImage" Type="varchar" MaxLength="255" />
+          <Property Name="IsActive" Type="tinyint" />
+          <Property Name="OMUserType" Type="bigint" />
+          <Property Name="Expertise" Type="varchar" MaxLength="64" />
+          <Property Name="Profession" Type="varchar" MaxLength="64" />
+          <Property Name="JoiningDate" Type="date" />
+          <Property Name="AddressLine1" Type="varchar" MaxLength="32" />
+          <Property Name="AddressLine2" Type="varchar" MaxLength="32" />
+          <Property Name="AddressLine3" Type="varchar" MaxLength="32" />
+          <Property Name="UserStatus" Type="varchar" MaxLength="16" />
+          <Property Name="CreatedBy" Type="bigint" />
+          <Property Name="CreatedDate" Type="datetime2" Precision="7" />
+          <Property Name="ModifiedBy" Type="bigint" />
+          <Property Name="ModifiedDate" Type="datetime2" Precision="7" />
+          <Property Name="WorkStation" Type="varchar" MaxLength="32" />
+          <Property Name="Password" Type="varchar" MaxLength="250" />
+          <Property Name="PasswordSalt" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityContainer Name="HRISModelStoreContainer">
+          <EntitySet Name="APPActivityMst" EntityType="Self.APPActivityMst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APPCityMst" EntityType="Self.APPCityMst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APPContinentMst" EntityType="Self.APPContinentMst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APPCountryMst" EntityType="Self.APPCountryMst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APPCountyMst" EntityType="Self.APPCountyMst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APPLocationMst" EntityType="Self.APPLocationMst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APPStateMst" EntityType="Self.APPStateMst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="APPUserActivity" EntityType="Self.APPUserActivity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UMMForgotPassword" EntityType="Self.UMMForgotPassword" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UMMRoleMst" EntityType="Self.UMMRoleMst" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UMMUserGroup" EntityType="Self.UMMUserGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UMMUserGroupDetail" EntityType="Self.UMMUserGroupDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UMMUserLocationMap" EntityType="Self.UMMUserLocationMap" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UMMUserLogIn" EntityType="Self.UMMUserLogIn" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UMMUserProfile" EntityType="Self.UMMUserProfile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CYCCycleMST" EntityType="Self.CYCCycleMST" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CYCCycleMST].[CYCCycleMSTId] AS [CYCCycleMSTId], 
+    [CYCCycleMST].[CycleName] AS [CycleName], 
+    [CYCCycleMST].[CycleBeginDate] AS [CycleBeginDate], 
+    [CYCCycleMST].[CycleEndDate] AS [CycleEndDate], 
+    [CYCCycleMST].[CycleReleaseReportDate] AS [CycleReleaseReportDate], 
+    [CYCCycleMST].[Status] AS [Status]
+    FROM [dbo].[CYCCycleMST] AS [CYCCycleMST]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CYCCycleToParameterMap" EntityType="Self.CYCCycleToParameterMap" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CYCCycleToParameterMap].[CYCCycleToParameterMapId] AS [CYCCycleToParameterMapId], 
+    [CYCCycleToParameterMap].[CYCCycleMSTId] AS [CYCCycleMSTId], 
+    [CYCCycleToParameterMap].[CYCParameterMSTId] AS [CYCParameterMSTId]
+    FROM [dbo].[CYCCycleToParameterMap] AS [CYCCycleToParameterMap]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CYCCycleToUserMap" EntityType="Self.CYCCycleToUserMap" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CYCCycleToUserMap].[CYCCycleToUserMapId] AS [CYCCycleToUserMapId], 
+    [CYCCycleToUserMap].[CYCCycleMSTId] AS [CYCCycleMSTId], 
+    [CYCCycleToUserMap].[UserId] AS [UserId], 
+    [CYCCycleToUserMap].[Status] AS [Status]
+    FROM [dbo].[CYCCycleToUserMap] AS [CYCCycleToUserMap]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CYCEValuation" EntityType="Self.CYCEValuation" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CYCEValuation].[CYCEValuationId] AS [CYCEValuationId], 
+    [CYCEValuation].[CYCCycleToUserMapId] AS [CYCCycleToUserMapId], 
+    [CYCEValuation].[CYCQuesMSTId] AS [CYCQuesMSTId], 
+    [CYCEValuation].[StyleID] AS [StyleID]
+    FROM [dbo].[CYCEValuation] AS [CYCEValuation]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CYCGoalMST" EntityType="Self.CYCGoalMST" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CYCGoalMST].[CYCGoalMSTId] AS [CYCGoalMSTId], 
+    [CYCGoalMST].[GoalName] AS [GoalName]
+    FROM [dbo].[CYCGoalMST] AS [CYCGoalMST]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CYCParameterMST" EntityType="Self.CYCParameterMST" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CYCParameterMST].[CYCParameterMSTId] AS [CYCParameterMSTId], 
+    [CYCParameterMST].[ParameterName] AS [ParameterName], 
+    [CYCParameterMST].[CYCRatingSystemMSTId] AS [CYCRatingSystemMSTId]
+    FROM [dbo].[CYCParameterMST] AS [CYCParameterMST]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CYCQuesMST" EntityType="Self.CYCQuesMST" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CYCQuesMST].[CYCQuesMSTId] AS [CYCQuesMSTId], 
+    [CYCQuesMST].[Ques] AS [Ques], 
+    [CYCQuesMST].[CYCParameterMSTId] AS [CYCParameterMSTId], 
+    [CYCQuesMST].[CYCStyleMSTId] AS [CYCStyleMSTId]
+    FROM [dbo].[CYCQuesMST] AS [CYCQuesMST]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CYCRatingSystemMST" EntityType="Self.CYCRatingSystemMST" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CYCRatingSystemMST].[CYCRatingSystemMSTId] AS [CYCRatingSystemMSTId], 
+    [CYCRatingSystemMST].[RatingSystemName] AS [RatingSystemName]
+    FROM [dbo].[CYCRatingSystemMST] AS [CYCRatingSystemMST]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CYCReviewersMST" EntityType="Self.CYCReviewersMST" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CYCReviewersMST].[CYCReviewersMSTId] AS [CYCReviewersMSTId], 
+    [CYCReviewersMST].[Name] AS [Name]
+    FROM [dbo].[CYCReviewersMST] AS [CYCReviewersMST]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CYCSubGoalMST" EntityType="Self.CYCSubGoalMST" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CYCSubGoalMST].[CYCSubGoalMSTId] AS [CYCSubGoalMSTId], 
+    [CYCSubGoalMST].[CYCGoalMSTId] AS [CYCGoalMSTId], 
+    [CYCSubGoalMST].[SubGoalName] AS [SubGoalName]
+    FROM [dbo].[CYCSubGoalMST] AS [CYCSubGoalMST]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="CYCSubgoalToUserMap" EntityType="Self.CYCSubgoalToUserMap" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [CYCSubgoalToUserMap].[CYCSubgoalToUserMapId] AS [CYCSubgoalToUserMapId], 
+    [CYCSubgoalToUserMap].[CYCSubGoalMSTId] AS [CYCSubGoalMSTId], 
+    [CYCSubgoalToUserMap].[UserId] AS [UserId], 
+    [CYCSubgoalToUserMap].[DueDate] AS [DueDate], 
+    [CYCSubgoalToUserMap].[CompletedBy] AS [CompletedBy], 
+    [CYCSubgoalToUserMap].[PriorityId] AS [PriorityId], 
+    [CYCSubgoalToUserMap].[Status] AS [Status]
+    FROM [dbo].[CYCSubgoalToUserMap] AS [CYCSubgoalToUserMap]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="PriorityMST" EntityType="Self.PriorityMST" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [PriorityMST].[PriorityMSTId] AS [PriorityMSTId], 
+    [PriorityMST].[Name] AS [Name]
+    FROM [dbo].[PriorityMST] AS [PriorityMST]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HRISModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="APPActivityMst">
+          <Key>
+            <PropertyRef Name="APPActivityMstId" />
+          </Key>
+          <Property Name="APPActivityMstId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ActivityName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ActivityCode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="ActivityDesc" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Byte" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="WorkStation" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="APPCityMst">
+          <Key>
+            <PropertyRef Name="APPCityMstId" />
+          </Key>
+          <Property Name="APPCityMstId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="APPCountyMstId" Type="Int64" Nullable="false" />
+          <Property Name="CityName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CityCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Byte" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="WorkStation" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="APPContinentMst">
+          <Key>
+            <PropertyRef Name="APPContinentMstId" />
+          </Key>
+          <Property Name="APPContinentMstId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ContinentName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ContinentCode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Byte" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="WorkStation" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="APPCountryMst">
+          <Key>
+            <PropertyRef Name="APPCountryMstId" />
+          </Key>
+          <Property Name="APPCountryMstId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="APPContinentMstId" Type="Int64" Nullable="false" />
+          <Property Name="CountryName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CountryCode" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Byte" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="WorkStation" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="APPCountyMst">
+          <Key>
+            <PropertyRef Name="APPCountyMstId" />
+          </Key>
+          <Property Name="APPCountyMstId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="APPStateMstId" Type="Int64" Nullable="false" />
+          <Property Name="CountyName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CountyCode" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Byte" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="WorkStation" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="APPLocationMst">
+          <Key>
+            <PropertyRef Name="APPLocationMstId" />
+          </Key>
+          <Property Name="APPLocationMstId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="APPCityMstId" Type="Int64" Nullable="false" />
+          <Property Name="LocationName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LocationCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LocationHead" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="OMLocationType" Type="Int32" />
+          <Property Name="AddressLine1" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="AddressLine2" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="AddressLine3" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Byte" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="WorkStation" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="APPStateMst">
+          <Key>
+            <PropertyRef Name="APPStateMstId" />
+          </Key>
+          <Property Name="APPStateMstId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="APPCountryMstId" Type="Int64" Nullable="false" />
+          <Property Name="StateName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StateCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Byte" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="WorkStation" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="APPUserActivity">
+          <Key>
+            <PropertyRef Name="APPUserActivityId" />
+          </Key>
+          <Property Name="APPUserActivityId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UMMUserProfileId" Type="Int64" Nullable="false" />
+          <Property Name="APPActivityMstId" Type="Int64" Nullable="false" />
+          <Property Name="ActivityStatus" Type="Int64" />
+          <Property Name="ActivityError" Type="String" MaxLength="512" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Int16" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="WorkStation" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UMMForgotPassword">
+          <Key>
+            <PropertyRef Name="UMMForgotPasswordId" />
+          </Key>
+          <Property Name="UMMForgotPasswordId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UMMUserProfileId" Type="Int64" Nullable="false" />
+          <Property Name="Key" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Byte" />
+          <Property Name="CreatedBy" Type="Int64" Nullable="false" />
+          <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="Workstation" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UMMRoleMst">
+          <Key>
+            <PropertyRef Name="UMMRoleMstId" />
+          </Key>
+          <Property Name="UMMRoleMstId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoleName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="RoleCode" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="RoleDesc" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Byte" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="WorkStation" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UMMUserGroup">
+          <Key>
+            <PropertyRef Name="UMMUserGroupId" />
+          </Key>
+          <Property Name="UMMUserGroupId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GroupName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="IsActive" Type="Byte" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="CreatedTime" Type="Time" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="WorkStation" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UMMUserGroupDetail">
+          <Key>
+            <PropertyRef Name="UMMUserGroupDetailId" />
+          </Key>
+          <Property Name="UMMUserGroupDetailId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UMMUserGroupId" Type="Int64" Nullable="false" />
+          <Property Name="UMMUserProfileId_GroupMember" Type="Int64" Nullable="false" />
+          <Property Name="UMMUserProfileId_GroupOwner" Type="Int64" Nullable="false" />
+          <Property Name="IsStarredActive" Type="Byte" />
+          <Property Name="IsActive" Type="Byte" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="CreatedTime" Type="Time" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="WorkStation" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UMMUserLocationMap">
+          <Key>
+            <PropertyRef Name="UMMUserLocationMapId" />
+          </Key>
+          <Property Name="UMMUserLocationMapId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UMMUserProfileId" Type="Int64" Nullable="false" />
+          <Property Name="APPLocationMstId" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Byte" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="WorkStation" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UMMUserLogIn">
+          <Key>
+            <PropertyRef Name="UMMUserLogInId" />
+          </Key>
+          <Property Name="UMMUserLogInId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UMMUserProfileId" Type="Int64" Nullable="false" />
+          <Property Name="IsActive" Type="Byte" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="WorkStation" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="UMMUserProfile">
+          <Key>
+            <PropertyRef Name="UMMUserProfileId" />
+          </Key>
+          <Property Name="UMMUserProfileId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="APPCountryMstId" Type="Int64" />
+          <Property Name="AppStateMstId" Type="Int64" />
+          <Property Name="AppCountyMstId" Type="Int64" />
+          <Property Name="APPCityMstId" Type="Int64" />
+          <Property Name="APPZipCodeMstId" Type="Int64" />
+          <Property Name="Salutation" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="OMGender" Type="Int64" />
+          <Property Name="BirthDate" Type="DateTime" Precision="0" />
+          <Property Name="Mobile" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="OfficeContact" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="UserEmail" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ProfileImage" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="IsActive" Type="Byte" />
+          <Property Name="OMUserType" Type="Int64" />
+          <Property Name="Expertise" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Profession" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="JoiningDate" Type="DateTime" Precision="0" />
+          <Property Name="AddressLine1" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="AddressLine2" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="AddressLine3" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="UserStatus" Type="String" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedBy" Type="Int64" />
+          <Property Name="CreatedDate" Type="DateTime" Precision="7" />
+          <Property Name="ModifiedBy" Type="Int64" />
+          <Property Name="ModifiedDate" Type="DateTime" Precision="7" />
+          <Property Name="WorkStation" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="PasswordSalt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CYCCycleMST">
+          <Key>
+            <PropertyRef Name="CYCCycleMSTId" />
+          </Key>
+          <Property Name="CYCCycleMSTId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CycleName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CycleBeginDate" Type="DateTime" Precision="3" />
+          <Property Name="CycleEndDate" Type="DateTime" Precision="3" />
+          <Property Name="CycleReleaseReportDate" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CYCCycleToParameterMap">
+          <Key>
+            <PropertyRef Name="CYCCycleToParameterMapId" />
+          </Key>
+          <Property Name="CYCCycleToParameterMapId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CYCCycleMSTId" Type="Int64" />
+          <Property Name="CYCParameterMSTId" Type="Int64" />
+        </EntityType>
+        <EntityType Name="CYCCycleToUserMap">
+          <Key>
+            <PropertyRef Name="CYCCycleToUserMapId" />
+          </Key>
+          <Property Name="CYCCycleToUserMapId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CYCCycleMSTId" Type="Int64" />
+          <Property Name="UserId" Type="Int64" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CYCEValuation">
+          <Key>
+            <PropertyRef Name="CYCEValuationId" />
+          </Key>
+          <Property Name="CYCEValuationId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CYCCycleToUserMapId" Type="Int64" />
+          <Property Name="CYCQuesMSTId" Type="Int64" />
+          <Property Name="StyleID" Type="Int64" />
+        </EntityType>
+        <EntityType Name="CYCGoalMST">
+          <Key>
+            <PropertyRef Name="CYCGoalMSTId" />
+          </Key>
+          <Property Name="CYCGoalMSTId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GoalName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CYCParameterMST">
+          <Key>
+            <PropertyRef Name="CYCParameterMSTId" />
+          </Key>
+          <Property Name="CYCParameterMSTId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParameterName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CYCRatingSystemMSTId" Type="Int64" />
+        </EntityType>
+        <EntityType Name="CYCQuesMST">
+          <Key>
+            <PropertyRef Name="CYCQuesMSTId" />
+          </Key>
+          <Property Name="CYCQuesMSTId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ques" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="CYCParameterMSTId" Type="Int64" />
+          <Property Name="CYCStyleMSTId" Type="Int64" />
+        </EntityType>
+        <EntityType Name="CYCRatingSystemMST">
+          <Key>
+            <PropertyRef Name="CYCRatingSystemMSTId" />
+          </Key>
+          <Property Name="CYCRatingSystemMSTId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RatingSystemName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CYCReviewersMST">
+          <Key>
+            <PropertyRef Name="CYCReviewersMSTId" />
+          </Key>
+          <Property Name="CYCReviewersMSTId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CYCSubGoalMST">
+          <Key>
+            <PropertyRef Name="CYCSubGoalMSTId" />
+          </Key>
+          <Property Name="CYCSubGoalMSTId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CYCGoalMSTId" Type="Int64" />
+          <Property Name="SubGoalName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="CYCSubgoalToUserMap">
+          <Key>
+            <PropertyRef Name="CYCSubgoalToUserMapId" />
+          </Key>
+          <Property Name="CYCSubgoalToUserMapId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CYCSubGoalMSTId" Type="Int64" />
+          <Property Name="UserId" Type="Int64" />
+          <Property Name="DueDate" Type="DateTime" Precision="0" />
+          <Property Name="CompletedBy" Type="DateTime" Precision="0" />
+          <Property Name="PriorityId" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="PriorityMST">
+          <Key>
+            <PropertyRef Name="PriorityMSTId" />
+          </Key>
+          <Property Name="PriorityMSTId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="HRISEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="APPActivityMsts" EntityType="Self.APPActivityMst" />
+          <EntitySet Name="APPCityMsts" EntityType="Self.APPCityMst" />
+          <EntitySet Name="APPContinentMsts" EntityType="Self.APPContinentMst" />
+          <EntitySet Name="APPCountryMsts" EntityType="Self.APPCountryMst" />
+          <EntitySet Name="APPCountyMsts" EntityType="Self.APPCountyMst" />
+          <EntitySet Name="APPLocationMsts" EntityType="Self.APPLocationMst" />
+          <EntitySet Name="APPStateMsts" EntityType="Self.APPStateMst" />
+          <EntitySet Name="APPUserActivities" EntityType="Self.APPUserActivity" />
+          <EntitySet Name="UMMForgotPasswords" EntityType="Self.UMMForgotPassword" />
+          <EntitySet Name="UMMRoleMsts" EntityType="Self.UMMRoleMst" />
+          <EntitySet Name="UMMUserGroups" EntityType="Self.UMMUserGroup" />
+          <EntitySet Name="UMMUserGroupDetails" EntityType="Self.UMMUserGroupDetail" />
+          <EntitySet Name="UMMUserLocationMaps" EntityType="Self.UMMUserLocationMap" />
+          <EntitySet Name="UMMUserLogIns" EntityType="Self.UMMUserLogIn" />
+          <EntitySet Name="UMMUserProfiles" EntityType="Self.UMMUserProfile" />
+          <EntitySet Name="CYCCycleMSTs" EntityType="Self.CYCCycleMST" />
+          <EntitySet Name="CYCCycleToParameterMaps" EntityType="Self.CYCCycleToParameterMap" />
+          <EntitySet Name="CYCCycleToUserMaps" EntityType="Self.CYCCycleToUserMap" />
+          <EntitySet Name="CYCEValuations" EntityType="Self.CYCEValuation" />
+          <EntitySet Name="CYCGoalMSTs" EntityType="Self.CYCGoalMST" />
+          <EntitySet Name="CYCParameterMSTs" EntityType="Self.CYCParameterMST" />
+          <EntitySet Name="CYCQuesMSTs" EntityType="Self.CYCQuesMST" />
+          <EntitySet Name="CYCRatingSystemMSTs" EntityType="Self.CYCRatingSystemMST" />
+          <EntitySet Name="CYCReviewersMSTs" EntityType="Self.CYCReviewersMST" />
+          <EntitySet Name="CYCSubGoalMSTs" EntityType="Self.CYCSubGoalMST" />
+          <EntitySet Name="CYCSubgoalToUserMaps" EntityType="Self.CYCSubgoalToUserMap" />
+          <EntitySet Name="PriorityMSTs" EntityType="Self.PriorityMST" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HRISModelStoreContainer" CdmEntityContainer="HRISEntities">
+          <EntitySetMapping Name="APPActivityMsts">
+            <EntityTypeMapping TypeName="HRISModel.APPActivityMst">
+              <MappingFragment StoreEntitySet="APPActivityMst">
+                <ScalarProperty Name="APPActivityMstId" ColumnName="APPActivityMstId" />
+                <ScalarProperty Name="ActivityName" ColumnName="ActivityName" />
+                <ScalarProperty Name="ActivityCode" ColumnName="ActivityCode" />
+                <ScalarProperty Name="ActivityDesc" ColumnName="ActivityDesc" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APPCityMsts">
+            <EntityTypeMapping TypeName="HRISModel.APPCityMst">
+              <MappingFragment StoreEntitySet="APPCityMst">
+                <ScalarProperty Name="APPCityMstId" ColumnName="APPCityMstId" />
+                <ScalarProperty Name="APPCountyMstId" ColumnName="APPCountyMstId" />
+                <ScalarProperty Name="CityName" ColumnName="CityName" />
+                <ScalarProperty Name="CityCode" ColumnName="CityCode" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APPContinentMsts">
+            <EntityTypeMapping TypeName="HRISModel.APPContinentMst">
+              <MappingFragment StoreEntitySet="APPContinentMst">
+                <ScalarProperty Name="APPContinentMstId" ColumnName="APPContinentMstId" />
+                <ScalarProperty Name="ContinentName" ColumnName="ContinentName" />
+                <ScalarProperty Name="ContinentCode" ColumnName="ContinentCode" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APPCountryMsts">
+            <EntityTypeMapping TypeName="HRISModel.APPCountryMst">
+              <MappingFragment StoreEntitySet="APPCountryMst">
+                <ScalarProperty Name="APPCountryMstId" ColumnName="APPCountryMstId" />
+                <ScalarProperty Name="APPContinentMstId" ColumnName="APPContinentMstId" />
+                <ScalarProperty Name="CountryName" ColumnName="CountryName" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APPCountyMsts">
+            <EntityTypeMapping TypeName="HRISModel.APPCountyMst">
+              <MappingFragment StoreEntitySet="APPCountyMst">
+                <ScalarProperty Name="APPCountyMstId" ColumnName="APPCountyMstId" />
+                <ScalarProperty Name="APPStateMstId" ColumnName="APPStateMstId" />
+                <ScalarProperty Name="CountyName" ColumnName="CountyName" />
+                <ScalarProperty Name="CountyCode" ColumnName="CountyCode" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APPLocationMsts">
+            <EntityTypeMapping TypeName="HRISModel.APPLocationMst">
+              <MappingFragment StoreEntitySet="APPLocationMst">
+                <ScalarProperty Name="APPLocationMstId" ColumnName="APPLocationMstId" />
+                <ScalarProperty Name="APPCityMstId" ColumnName="APPCityMstId" />
+                <ScalarProperty Name="LocationName" ColumnName="LocationName" />
+                <ScalarProperty Name="LocationCode" ColumnName="LocationCode" />
+                <ScalarProperty Name="LocationHead" ColumnName="LocationHead" />
+                <ScalarProperty Name="OMLocationType" ColumnName="OMLocationType" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddressLine3" ColumnName="AddressLine3" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APPStateMsts">
+            <EntityTypeMapping TypeName="HRISModel.APPStateMst">
+              <MappingFragment StoreEntitySet="APPStateMst">
+                <ScalarProperty Name="APPStateMstId" ColumnName="APPStateMstId" />
+                <ScalarProperty Name="APPCountryMstId" ColumnName="APPCountryMstId" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+                <ScalarProperty Name="StateCode" ColumnName="StateCode" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="APPUserActivities">
+            <EntityTypeMapping TypeName="HRISModel.APPUserActivity">
+              <MappingFragment StoreEntitySet="APPUserActivity">
+                <ScalarProperty Name="APPUserActivityId" ColumnName="APPUserActivityId" />
+                <ScalarProperty Name="UMMUserProfileId" ColumnName="UMMUserProfileId" />
+                <ScalarProperty Name="APPActivityMstId" ColumnName="APPActivityMstId" />
+                <ScalarProperty Name="ActivityStatus" ColumnName="ActivityStatus" />
+                <ScalarProperty Name="ActivityError" ColumnName="ActivityError" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UMMForgotPasswords">
+            <EntityTypeMapping TypeName="HRISModel.UMMForgotPassword">
+              <MappingFragment StoreEntitySet="UMMForgotPassword">
+                <ScalarProperty Name="UMMForgotPasswordId" ColumnName="UMMForgotPasswordId" />
+                <ScalarProperty Name="UMMUserProfileId" ColumnName="UMMUserProfileId" />
+                <ScalarProperty Name="Key" ColumnName="Key" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="Workstation" ColumnName="Workstation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UMMRoleMsts">
+            <EntityTypeMapping TypeName="HRISModel.UMMRoleMst">
+              <MappingFragment StoreEntitySet="UMMRoleMst">
+                <ScalarProperty Name="UMMRoleMstId" ColumnName="UMMRoleMstId" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleCode" ColumnName="RoleCode" />
+                <ScalarProperty Name="RoleDesc" ColumnName="RoleDesc" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UMMUserGroups">
+            <EntityTypeMapping TypeName="HRISModel.UMMUserGroup">
+              <MappingFragment StoreEntitySet="UMMUserGroup">
+                <ScalarProperty Name="UMMUserGroupId" ColumnName="UMMUserGroupId" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UMMUserGroupDetails">
+            <EntityTypeMapping TypeName="HRISModel.UMMUserGroupDetail">
+              <MappingFragment StoreEntitySet="UMMUserGroupDetail">
+                <ScalarProperty Name="UMMUserGroupDetailId" ColumnName="UMMUserGroupDetailId" />
+                <ScalarProperty Name="UMMUserGroupId" ColumnName="UMMUserGroupId" />
+                <ScalarProperty Name="UMMUserProfileId_GroupMember" ColumnName="UMMUserProfileId_GroupMember" />
+                <ScalarProperty Name="UMMUserProfileId_GroupOwner" ColumnName="UMMUserProfileId_GroupOwner" />
+                <ScalarProperty Name="IsStarredActive" ColumnName="IsStarredActive" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="CreatedTime" ColumnName="CreatedTime" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UMMUserLocationMaps">
+            <EntityTypeMapping TypeName="HRISModel.UMMUserLocationMap">
+              <MappingFragment StoreEntitySet="UMMUserLocationMap">
+                <ScalarProperty Name="UMMUserLocationMapId" ColumnName="UMMUserLocationMapId" />
+                <ScalarProperty Name="UMMUserProfileId" ColumnName="UMMUserProfileId" />
+                <ScalarProperty Name="APPLocationMstId" ColumnName="APPLocationMstId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UMMUserLogIns">
+            <EntityTypeMapping TypeName="HRISModel.UMMUserLogIn">
+              <MappingFragment StoreEntitySet="UMMUserLogIn">
+                <ScalarProperty Name="UMMUserLogInId" ColumnName="UMMUserLogInId" />
+                <ScalarProperty Name="UMMUserProfileId" ColumnName="UMMUserProfileId" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UMMUserProfiles">
+            <EntityTypeMapping TypeName="HRISModel.UMMUserProfile">
+              <MappingFragment StoreEntitySet="UMMUserProfile">
+                <ScalarProperty Name="UMMUserProfileId" ColumnName="UMMUserProfileId" />
+                <ScalarProperty Name="APPCountryMstId" ColumnName="APPCountryMstId" />
+                <ScalarProperty Name="AppStateMstId" ColumnName="AppStateMstId" />
+                <ScalarProperty Name="AppCountyMstId" ColumnName="AppCountyMstId" />
+                <ScalarProperty Name="APPCityMstId" ColumnName="APPCityMstId" />
+                <ScalarProperty Name="APPZipCodeMstId" ColumnName="APPZipCodeMstId" />
+                <ScalarProperty Name="Salutation" ColumnName="Salutation" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="OMGender" ColumnName="OMGender" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="OfficeContact" ColumnName="OfficeContact" />
+                <ScalarProperty Name="UserEmail" ColumnName="UserEmail" />
+                <ScalarProperty Name="ProfileImage" ColumnName="ProfileImage" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="OMUserType" ColumnName="OMUserType" />
+                <ScalarProperty Name="Expertise" ColumnName="Expertise" />
+                <ScalarProperty Name="Profession" ColumnName="Profession" />
+                <ScalarProperty Name="JoiningDate" ColumnName="JoiningDate" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddressLine3" ColumnName="AddressLine3" />
+                <ScalarProperty Name="UserStatus" ColumnName="UserStatus" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="WorkStation" ColumnName="WorkStation" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CYCCycleMSTs">
+            <EntityTypeMapping TypeName="HRISModel.CYCCycleMST">
+              <MappingFragment StoreEntitySet="CYCCycleMST">
+                <ScalarProperty Name="CYCCycleMSTId" ColumnName="CYCCycleMSTId" />
+                <ScalarProperty Name="CycleName" ColumnName="CycleName" />
+                <ScalarProperty Name="CycleBeginDate" ColumnName="CycleBeginDate" />
+                <ScalarProperty Name="CycleEndDate" ColumnName="CycleEndDate" />
+                <ScalarProperty Name="CycleReleaseReportDate" ColumnName="CycleReleaseReportDate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CYCCycleToParameterMaps">
+            <EntityTypeMapping TypeName="HRISModel.CYCCycleToParameterMap">
+              <MappingFragment StoreEntitySet="CYCCycleToParameterMap">
+                <ScalarProperty Name="CYCCycleToParameterMapId" ColumnName="CYCCycleToParameterMapId" />
+                <ScalarProperty Name="CYCCycleMSTId" ColumnName="CYCCycleMSTId" />
+                <ScalarProperty Name="CYCParameterMSTId" ColumnName="CYCParameterMSTId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CYCCycleToUserMaps">
+            <EntityTypeMapping TypeName="HRISModel.CYCCycleToUserMap">
+              <MappingFragment StoreEntitySet="CYCCycleToUserMap">
+                <ScalarProperty Name="CYCCycleToUserMapId" ColumnName="CYCCycleToUserMapId" />
+                <ScalarProperty Name="CYCCycleMSTId" ColumnName="CYCCycleMSTId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CYCEValuations">
+            <EntityTypeMapping TypeName="HRISModel.CYCEValuation">
+              <MappingFragment StoreEntitySet="CYCEValuation">
+                <ScalarProperty Name="CYCEValuationId" ColumnName="CYCEValuationId" />
+                <ScalarProperty Name="CYCCycleToUserMapId" ColumnName="CYCCycleToUserMapId" />
+                <ScalarProperty Name="CYCQuesMSTId" ColumnName="CYCQuesMSTId" />
+                <ScalarProperty Name="StyleID" ColumnName="StyleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CYCGoalMSTs">
+            <EntityTypeMapping TypeName="HRISModel.CYCGoalMST">
+              <MappingFragment StoreEntitySet="CYCGoalMST">
+                <ScalarProperty Name="CYCGoalMSTId" ColumnName="CYCGoalMSTId" />
+                <ScalarProperty Name="GoalName" ColumnName="GoalName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CYCParameterMSTs">
+            <EntityTypeMapping TypeName="HRISModel.CYCParameterMST">
+              <MappingFragment StoreEntitySet="CYCParameterMST">
+                <ScalarProperty Name="CYCParameterMSTId" ColumnName="CYCParameterMSTId" />
+                <ScalarProperty Name="ParameterName" ColumnName="ParameterName" />
+                <ScalarProperty Name="CYCRatingSystemMSTId" ColumnName="CYCRatingSystemMSTId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CYCQuesMSTs">
+            <EntityTypeMapping TypeName="HRISModel.CYCQuesMST">
+              <MappingFragment StoreEntitySet="CYCQuesMST">
+                <ScalarProperty Name="CYCQuesMSTId" ColumnName="CYCQuesMSTId" />
+                <ScalarProperty Name="Ques" ColumnName="Ques" />
+                <ScalarProperty Name="CYCParameterMSTId" ColumnName="CYCParameterMSTId" />
+                <ScalarProperty Name="CYCStyleMSTId" ColumnName="CYCStyleMSTId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CYCRatingSystemMSTs">
+            <EntityTypeMapping TypeName="HRISModel.CYCRatingSystemMST">
+              <MappingFragment StoreEntitySet="CYCRatingSystemMST">
+                <ScalarProperty Name="CYCRatingSystemMSTId" ColumnName="CYCRatingSystemMSTId" />
+                <ScalarProperty Name="RatingSystemName" ColumnName="RatingSystemName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CYCReviewersMSTs">
+            <EntityTypeMapping TypeName="HRISModel.CYCReviewersMST">
+              <MappingFragment StoreEntitySet="CYCReviewersMST">
+                <ScalarProperty Name="CYCReviewersMSTId" ColumnName="CYCReviewersMSTId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CYCSubGoalMSTs">
+            <EntityTypeMapping TypeName="HRISModel.CYCSubGoalMST">
+              <MappingFragment StoreEntitySet="CYCSubGoalMST">
+                <ScalarProperty Name="CYCSubGoalMSTId" ColumnName="CYCSubGoalMSTId" />
+                <ScalarProperty Name="CYCGoalMSTId" ColumnName="CYCGoalMSTId" />
+                <ScalarProperty Name="SubGoalName" ColumnName="SubGoalName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CYCSubgoalToUserMaps">
+            <EntityTypeMapping TypeName="HRISModel.CYCSubgoalToUserMap">
+              <MappingFragment StoreEntitySet="CYCSubgoalToUserMap">
+                <ScalarProperty Name="CYCSubgoalToUserMapId" ColumnName="CYCSubgoalToUserMapId" />
+                <ScalarProperty Name="CYCSubGoalMSTId" ColumnName="CYCSubGoalMSTId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="CompletedBy" ColumnName="CompletedBy" />
+                <ScalarProperty Name="PriorityId" ColumnName="PriorityId" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PriorityMSTs">
+            <EntityTypeMapping TypeName="HRISModel.PriorityMST">
+              <MappingFragment StoreEntitySet="PriorityMST">
+                <ScalarProperty Name="PriorityMSTId" ColumnName="PriorityMSTId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
