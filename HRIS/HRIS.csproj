@@ -183,6 +183,9 @@
     <Compile Include="Models\PriorityMST.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UMMForgotPassword.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

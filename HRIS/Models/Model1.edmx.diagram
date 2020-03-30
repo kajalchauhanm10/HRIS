@@ -32,6 +32,8 @@
         <EntityTypeShape EntityType="HRISModel.CYCSubGoalMST" Width="1.5" PointX="4.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HRISModel.CYCSubgoalToUserMap" Width="1.5" PointX="6.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HRISModel.PriorityMST" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRISModel.sysdiagram" Width="1.5" PointX="9.375" PointY="14.75" />
+        <AssociationConnector Association="HRISModel.FK_CYCQuesMST_CYCParameterMST1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

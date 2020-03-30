@@ -14,8 +14,17 @@ namespace HRIS.Models
     
     public partial class CYCParameterMST
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CYCParameterMST()
+        {
+            this.CYCQuesMSTs = new HashSet<CYCQuesMST>();
+        }
+    
         public long CYCParameterMSTId { get; set; }
         public string ParameterName { get; set; }
         public Nullable<long> CYCRatingSystemMSTId { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CYCQuesMST> CYCQuesMSTs { get; set; }
     }
 }

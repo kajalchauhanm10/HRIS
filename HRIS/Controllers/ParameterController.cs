@@ -16,89 +16,90 @@ namespace HRIS.Controllers
     {
         private HRISEntities db = new HRISEntities();
 
-        // GET: api/Parameter
-        public IQueryable<CYCParameterMST> GetCYCParameterMSTs()
+        [HttpGet]
+        [Route("api/Parameter/GetParameters")]
+        public HttpResponseMessage GetParameters()
         {
-            return db.CYCParameterMSTs;
-        }
-
-        // GET: api/Parameter/5
-        [ResponseType(typeof(CYCParameterMST))]
-        public IHttpActionResult GetCYCParameterMST(long id)
-        {
-            CYCParameterMST cYCParameterMST = db.CYCParameterMSTs.Find(id);
-            if (cYCParameterMST == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(cYCParameterMST);
-        }
-
-        // PUT: api/Parameter/5
-        [ResponseType(typeof(void))]
-        public IHttpActionResult PutCYCParameterMST(long id, CYCParameterMST cYCParameterMST)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            if (id != cYCParameterMST.CYCParameterMSTId)
-            {
-                return BadRequest();
-            }
-
-            db.Entry(cYCParameterMST).State = EntityState.Modified;
-
             try
             {
-                db.SaveChanges();
+                List<CYCParameterMST> ParametersList = db.CYCParameterMSTs.ToList();
+
+                return Request.CreateResponse(HttpStatusCode.OK, ParametersList);
             }
-            catch (DbUpdateConcurrencyException)
+            catch(Exception ex)
             {
-                if (!CYCParameterMSTExists(id))
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("api/Parameter/GetRatingSystems")]
+        public HttpResponseMessage GetRatingSystems()
+        {
+            try
+            {
+                List<CYCRatingSystemMST> RatingSystemsList = db.CYCRatingSystemMSTs.ToList();
+
+                return Request.CreateResponse(HttpStatusCode.OK, RatingSystemsList);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpGet]
+        [Route("api/Parameter/GetParameterByName/{name}")]
+        public HttpResponseMessage GetParameterByName(string name)
+        {
+            try
+            {
+                CYCParameterMST cYCParameterMST = db.CYCParameterMSTs.Where(x => x.ParameterName == name).FirstOrDefault();
+                if(cYCParameterMST == null)
                 {
-                    return NotFound();
+                    return Request.CreateResponse(HttpStatusCode.OK, "Parameter does not exist");
                 }
                 else
                 {
-                    throw;
+                    return Request.CreateResponse(HttpStatusCode.OK, "Parameter already exists");
                 }
             }
-
-            return StatusCode(HttpStatusCode.NoContent);
+            catch(Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
         }
 
-        // POST: api/Parameter
-        [ResponseType(typeof(CYCParameterMST))]
-        public IHttpActionResult PostCYCParameterMST(CYCParameterMST cYCParameterMST)
+        [HttpPost]
+        [Route("api/Parameter/PostParameterQuestionsList")]
+        public HttpResponseMessage PostParameterQuestionsList(CYCParameterMST Parameter)
         {
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                db.CYCParameterMSTs.Add(Parameter);
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK, "Questions Added successfully");
             }
-
-            db.CYCParameterMSTs.Add(cYCParameterMST);
-            db.SaveChanges();
-
-            return CreatedAtRoute("DefaultApi", new { id = cYCParameterMST.CYCParameterMSTId }, cYCParameterMST);
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
         }
 
-        // DELETE: api/Parameter/5
-        [ResponseType(typeof(CYCParameterMST))]
-        public IHttpActionResult DeleteCYCParameterMST(long id)
+        [HttpPost]
+        [Route("api/Parameter/PostParameter")]
+        public HttpResponseMessage PostParameter(CYCParameterMST cYCParameterMST)
         {
-            CYCParameterMST cYCParameterMST = db.CYCParameterMSTs.Find(id);
-            if (cYCParameterMST == null)
+            try
             {
-                return NotFound();
+                db.CYCParameterMSTs.Add(cYCParameterMST);
+                db.SaveChanges();
+                return Request.CreateResponse(HttpStatusCode.OK, "Parameter Created successfully");
             }
-
-            db.CYCParameterMSTs.Remove(cYCParameterMST);
-            db.SaveChanges();
-
-            return Ok(cYCParameterMST);
+            catch(Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
         }
 
         protected override void Dispose(bool disposing)
