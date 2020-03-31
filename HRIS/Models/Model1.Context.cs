@@ -53,5 +53,6 @@ namespace HRIS.Models
         public virtual DbSet<CYCSubgoalToUserMap> CYCSubgoalToUserMaps { get; set; }
         public virtual DbSet<PriorityMST> PriorityMSTs { get; set; }
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<CYCStyleMST> CYCStyleMSTs { get; set; }
     }
 }

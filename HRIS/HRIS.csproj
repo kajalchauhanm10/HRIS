@@ -159,6 +159,9 @@
     <Compile Include="Models\CYCReviewersMST.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CYCStyleMST.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\CYCSubGoalMST.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

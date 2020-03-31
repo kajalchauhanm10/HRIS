@@ -20,5 +20,6 @@ namespace HRIS.Models
         public Nullable<long> CYCStyleMSTId { get; set; }
     
         public virtual CYCParameterMST CYCParameterMST { get; set; }
+        public virtual CYCStyleMST CYCStyleMST { get; set; }
     }
 }

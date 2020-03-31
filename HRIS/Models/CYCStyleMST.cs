@@ -12,20 +12,19 @@ namespace HRIS.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class CYCParameterMST
+    public partial class CYCStyleMST
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public CYCParameterMST()
+        public CYCStyleMST()
         {
             this.CYCQuesMSTs = new HashSet<CYCQuesMST>();
         }
     
-        public long CYCParameterMSTId { get; set; }
-        public string ParameterName { get; set; }
-        public Nullable<long> CYCRatingSystemMSTId { get; set; }
+        public long StyleID { get; set; }
+        public string StyleVal { get; set; }
+        public Nullable<long> ParentID { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CYCQuesMST> CYCQuesMSTs { get; set; }
-        public virtual CYCRatingSystemMST CYCRatingSystemMST { get; set; }
     }
 }

@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using HRIS.Models;
+using HRIS.Utility;
 
 namespace HRIS.Controllers
 {
@@ -22,9 +23,15 @@ namespace HRIS.Controllers
         {
             try
             {
-                List<CYCParameterMST> ParametersList = db.CYCParameterMSTs.ToList();
+                List<KeyValuePair<long, string>> nameList = new List<KeyValuePair<long, string>>();
+                var parameters = db.CYCParameterMSTs.Select(x => new { x.CYCParameterMSTId, x.ParameterName }).ToList();
+                foreach(var param in parameters)
+                {
+                    KeyValuePair<long, string> nameObj = new KeyValuePair<long, string>(param.CYCParameterMSTId, param.ParameterName);
+                    nameList.Add(nameObj);
+                }
 
-                return Request.CreateResponse(HttpStatusCode.OK, ParametersList);
+                return Request.CreateResponse(HttpStatusCode.OK, nameList);
             }
             catch(Exception ex)
             {
@@ -49,13 +56,29 @@ namespace HRIS.Controllers
         }
 
         [HttpGet]
+        [Route("api/Parameter/GetStyle")]
+        public HttpResponseMessage GetStyle()
+        {
+            try
+            {
+                List<CYCStyleMST> StylesList = db.CYCStyleMSTs.ToList();
+
+                return Request.CreateResponse(HttpStatusCode.OK, StylesList);
+            }
+            catch (Exception ex)
+            {
+                return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
+            }
+        }
+
+        [HttpGet]
         [Route("api/Parameter/GetParameterByName/{name}")]
         public HttpResponseMessage GetParameterByName(string name)
         {
             try
             {
-                CYCParameterMST cYCParameterMST = db.CYCParameterMSTs.Where(x => x.ParameterName == name).FirstOrDefault();
-                if(cYCParameterMST == null)
+                string parameterName = db.CYCParameterMSTs.Where(x => x.ParameterName == name).Select(x => x.ParameterName).FirstOrDefault();
+                if(parameterName == null)
                 {
                     return Request.CreateResponse(HttpStatusCode.OK, "Parameter does not exist");
                 }
@@ -70,17 +93,36 @@ namespace HRIS.Controllers
             }
         }
 
-        [HttpPost]
-        [Route("api/Parameter/PostParameterQuestionsList")]
-        public HttpResponseMessage PostParameterQuestionsList(CYCParameterMST Parameter)
+        [HttpGet]
+        [Route("api/Parameter/GetFullParameterByName/{id}")]
+        public HttpResponseMessage GetFullParameterByName(long id)
         {
             try
             {
-                db.CYCParameterMSTs.Add(Parameter);
-                db.SaveChanges();
-                return Request.CreateResponse(HttpStatusCode.OK, "Questions Added successfully");
+                CYCParameterMST tempParameter = db.CYCParameterMSTs.Where(x => x.CYCParameterMSTId == id).FirstOrDefault();
+
+                List<Question> quesList = new List<Question>();
+                foreach(CYCQuesMST quesMST in tempParameter.CYCQuesMSTs)
+                {
+                    Question ques = new Question()
+                    {
+                        Id = quesMST.CYCQuesMSTId,
+                        Ques = quesMST.Ques,
+                        StyleValue = quesMST.CYCStyleMST.StyleVal
+                    };
+                    quesList.Add(ques);
+                }
+
+                Parameter parameter = new Parameter()
+                {
+                    Id = tempParameter.CYCParameterMSTId,
+                    ParameterName = tempParameter.ParameterName,
+                    QuestionsList = quesList,
+                    RatingSystemName = tempParameter.CYCRatingSystemMST.RatingSystemName
+                };
+                return Request.CreateResponse(HttpStatusCode.OK, parameter);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 return Request.CreateResponse(HttpStatusCode.InternalServerError, ex.Message);
             }

@@ -201,8 +201,6 @@ warning 6002: The table/view 'HRIS.dbo.CYCGoalMST' does not have a primary key d
           <Property Name="CYCParameterMSTId" Type="bigint" />
           <Property Name="CYCStyleMSTId" Type="bigint" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'HRIS.dbo.CYCRatingSystemMST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CYCRatingSystemMST">
           <Key>
             <PropertyRef Name="CYCRatingSystemMSTId" />
@@ -219,13 +217,14 @@ warning 6002: The table/view 'HRIS.dbo.CYCReviewersMST' does not have a primary 
           <Property Name="CYCReviewersMSTId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6013: The table/view 'HRIS.dbo.CYCStyleMST' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
         <EntityType Name="CYCStyleMST">
-          <Property Name="StyleID" Type="bigint" />
+          <Key>
+            <PropertyRef Name="StyleID" />
+          </Key>
+          <Property Name="StyleID" Type="bigint" Nullable="false" />
           <Property Name="StyleVal" Type="varchar" MaxLength="150" />
           <Property Name="ParentID" Type="bigint" />
-        </EntityType>-->
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'HRIS.dbo.CYCSubGoalMST' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CYCSubGoalMST">
@@ -393,6 +392,18 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
           <Property Name="Password" Type="varchar" MaxLength="250" />
           <Property Name="PasswordSalt" Type="varchar" MaxLength="250" />
         </EntityType>
+        <Association Name="FK_CYCParameterMST_CYCRatingSystemMST">
+          <End Role="CYCRatingSystemMST" Type="Self.CYCRatingSystemMST" Multiplicity="0..1" />
+          <End Role="CYCParameterMST" Type="Self.CYCParameterMST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CYCRatingSystemMST">
+              <PropertyRef Name="CYCRatingSystemMSTId" />
+            </Principal>
+            <Dependent Role="CYCParameterMST">
+              <PropertyRef Name="CYCRatingSystemMSTId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_CYCQuesMST_CYCParameterMST1">
           <End Role="CYCParameterMST" Type="Self.CYCParameterMST" Multiplicity="0..1" />
           <End Role="CYCQuesMST" Type="Self.CYCQuesMST" Multiplicity="*" />
@@ -402,6 +413,18 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
             </Principal>
             <Dependent Role="CYCQuesMST">
               <PropertyRef Name="CYCParameterMSTId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CYCQuesMST_CYCStyleMST">
+          <End Role="CYCStyleMST" Type="Self.CYCStyleMST" Multiplicity="0..1" />
+          <End Role="CYCQuesMST" Type="Self.CYCQuesMST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CYCStyleMST">
+              <PropertyRef Name="StyleID" />
+            </Principal>
+            <Dependent Role="CYCQuesMST">
+              <PropertyRef Name="CYCStyleMSTId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -416,6 +439,8 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
           <EntitySet Name="APPUserActivity" EntityType="Self.APPUserActivity" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CYCParameterMST" EntityType="Self.CYCParameterMST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CYCQuesMST" EntityType="Self.CYCQuesMST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CYCRatingSystemMST" EntityType="Self.CYCRatingSystemMST" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CYCStyleMST" EntityType="Self.CYCStyleMST" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UMMForgotPassword" EntityType="Self.UMMForgotPassword" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UMMRoleMst" EntityType="Self.UMMRoleMst" Schema="dbo" store:Type="Tables" />
@@ -463,12 +488,6 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
     [CYCGoalMST].[GoalName] AS [GoalName]
     FROM [dbo].[CYCGoalMST] AS [CYCGoalMST]</DefiningQuery>
           </EntitySet>
-          <EntitySet Name="CYCRatingSystemMST" EntityType="Self.CYCRatingSystemMST" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [CYCRatingSystemMST].[CYCRatingSystemMSTId] AS [CYCRatingSystemMSTId], 
-    [CYCRatingSystemMST].[RatingSystemName] AS [RatingSystemName]
-    FROM [dbo].[CYCRatingSystemMST] AS [CYCRatingSystemMST]</DefiningQuery>
-          </EntitySet>
           <EntitySet Name="CYCReviewersMST" EntityType="Self.CYCReviewersMST" store:Type="Tables" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [CYCReviewersMST].[CYCReviewersMSTId] AS [CYCReviewersMSTId], 
@@ -499,8 +518,16 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
     [PriorityMST].[Name] AS [Name]
     FROM [dbo].[PriorityMST] AS [PriorityMST]</DefiningQuery>
           </EntitySet>
+          <AssociationSet Name="FK_CYCParameterMST_CYCRatingSystemMST" Association="Self.FK_CYCParameterMST_CYCRatingSystemMST">
+            <End Role="CYCRatingSystemMST" EntitySet="CYCRatingSystemMST" />
+            <End Role="CYCParameterMST" EntitySet="CYCParameterMST" />
+          </AssociationSet>
           <AssociationSet Name="FK_CYCQuesMST_CYCParameterMST1" Association="Self.FK_CYCQuesMST_CYCParameterMST1">
             <End Role="CYCParameterMST" EntitySet="CYCParameterMST" />
+            <End Role="CYCQuesMST" EntitySet="CYCQuesMST" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CYCQuesMST_CYCStyleMST" Association="Self.FK_CYCQuesMST_CYCStyleMST">
+            <End Role="CYCStyleMST" EntitySet="CYCStyleMST" />
             <End Role="CYCQuesMST" EntitySet="CYCQuesMST" />
           </AssociationSet>
         </EntityContainer>
@@ -809,6 +836,7 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
           <Property Name="ParameterName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="CYCRatingSystemMSTId" Type="Int64" />
           <NavigationProperty Name="CYCQuesMSTs" Relationship="HRISModel.FK_CYCQuesMST_CYCParameterMST1" FromRole="CYCParameterMST" ToRole="CYCQuesMST" />
+          <NavigationProperty Name="CYCRatingSystemMST" Relationship="HRISModel.FK_CYCParameterMST_CYCRatingSystemMST" FromRole="CYCParameterMST" ToRole="CYCRatingSystemMST" />
         </EntityType>
         <EntityType Name="CYCQuesMST">
           <Key>
@@ -819,6 +847,7 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
           <Property Name="CYCParameterMSTId" Type="Int64" />
           <Property Name="CYCStyleMSTId" Type="Int64" />
           <NavigationProperty Name="CYCParameterMST" Relationship="HRISModel.FK_CYCQuesMST_CYCParameterMST1" FromRole="CYCQuesMST" ToRole="CYCParameterMST" />
+          <NavigationProperty Name="CYCStyleMST" Relationship="HRISModel.FK_CYCQuesMST_CYCStyleMST" FromRole="CYCQuesMST" ToRole="CYCStyleMST" />
         </EntityType>
         <EntityType Name="CYCRatingSystemMST">
           <Key>
@@ -826,6 +855,7 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
           </Key>
           <Property Name="CYCRatingSystemMSTId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RatingSystemName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CYCParameterMSTs" Relationship="HRISModel.FK_CYCParameterMST_CYCRatingSystemMST" FromRole="CYCRatingSystemMST" ToRole="CYCParameterMST" />
         </EntityType>
         <EntityType Name="CYCReviewersMST">
           <Key>
@@ -894,6 +924,15 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
             <End Role="CYCParameterMST" EntitySet="CYCParameterMSTs" />
             <End Role="CYCQuesMST" EntitySet="CYCQuesMSTs" />
           </AssociationSet>
+          <AssociationSet Name="FK_CYCParameterMST_CYCRatingSystemMST" Association="HRISModel.FK_CYCParameterMST_CYCRatingSystemMST">
+            <End Role="CYCRatingSystemMST" EntitySet="CYCRatingSystemMSTs" />
+            <End Role="CYCParameterMST" EntitySet="CYCParameterMSTs" />
+          </AssociationSet>
+          <EntitySet Name="CYCStyleMSTs" EntityType="HRISModel.CYCStyleMST" />
+          <AssociationSet Name="FK_CYCQuesMST_CYCStyleMST" Association="HRISModel.FK_CYCQuesMST_CYCStyleMST">
+            <End Role="CYCStyleMST" EntitySet="CYCStyleMSTs" />
+            <End Role="CYCQuesMST" EntitySet="CYCQuesMSTs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="sysdiagram">
           <Key>
@@ -914,6 +953,39 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
             </Principal>
             <Dependent Role="CYCQuesMST">
               <PropertyRef Name="CYCParameterMSTId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CYCParameterMST_CYCRatingSystemMST">
+          <End Type="HRISModel.CYCRatingSystemMST" Role="CYCRatingSystemMST" Multiplicity="0..1" />
+          <End Type="HRISModel.CYCParameterMST" Role="CYCParameterMST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CYCRatingSystemMST">
+              <PropertyRef Name="CYCRatingSystemMSTId" />
+            </Principal>
+            <Dependent Role="CYCParameterMST">
+              <PropertyRef Name="CYCRatingSystemMSTId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CYCStyleMST">
+          <Key>
+            <PropertyRef Name="StyleID" />
+          </Key>
+          <Property Name="StyleID" Type="Int64" Nullable="false" />
+          <Property Name="StyleVal" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ParentID" Type="Int64" />
+          <NavigationProperty Name="CYCQuesMSTs" Relationship="HRISModel.FK_CYCQuesMST_CYCStyleMST" FromRole="CYCStyleMST" ToRole="CYCQuesMST" />
+        </EntityType>
+        <Association Name="FK_CYCQuesMST_CYCStyleMST">
+          <End Type="HRISModel.CYCStyleMST" Role="CYCStyleMST" Multiplicity="0..1" />
+          <End Type="HRISModel.CYCQuesMST" Role="CYCQuesMST" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CYCStyleMST">
+              <PropertyRef Name="StyleID" />
+            </Principal>
+            <Dependent Role="CYCQuesMST">
+              <PropertyRef Name="CYCStyleMSTId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -1309,6 +1381,15 @@ warning 6002: The table/view 'HRIS.dbo.PriorityMST' does not have a primary key 
                 <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
                 <ScalarProperty Name="principal_id" ColumnName="principal_id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CYCStyleMSTs">
+            <EntityTypeMapping TypeName="HRISModel.CYCStyleMST">
+              <MappingFragment StoreEntitySet="CYCStyleMST">
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="StyleVal" ColumnName="StyleVal" />
+                <ScalarProperty Name="StyleID" ColumnName="StyleID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

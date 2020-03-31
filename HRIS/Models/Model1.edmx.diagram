@@ -26,7 +26,7 @@
         <EntityTypeShape EntityType="HRISModel.CYCEValuation" Width="1.5" PointX="12.75" PointY="3.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HRISModel.CYCGoalMST" Width="1.5" PointX="12.75" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HRISModel.CYCParameterMST" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="HRISModel.CYCQuesMST" Width="1.5" PointX="12.75" PointY="12.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HRISModel.CYCQuesMST" Width="1.5" PointX="12.75" PointY="12.875" IsExpanded="true" />
         <EntityTypeShape EntityType="HRISModel.CYCRatingSystemMST" Width="1.5" PointX="0.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HRISModel.CYCReviewersMST" Width="1.5" PointX="2.75" PointY="13.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HRISModel.CYCSubGoalMST" Width="1.5" PointX="4.75" PointY="13.75" IsExpanded="true" />
@@ -34,6 +34,9 @@
         <EntityTypeShape EntityType="HRISModel.PriorityMST" Width="1.5" PointX="14.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HRISModel.sysdiagram" Width="1.5" PointX="9.375" PointY="14.75" />
         <AssociationConnector Association="HRISModel.FK_CYCQuesMST_CYCParameterMST1" />
+        <AssociationConnector Association="HRISModel.FK_CYCParameterMST_CYCRatingSystemMST" />
+        <EntityTypeShape EntityType="HRISModel.CYCStyleMST" Width="1.5" PointX="15.375" PointY="3.75" />
+        <AssociationConnector Association="HRISModel.FK_CYCQuesMST_CYCStyleMST" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
